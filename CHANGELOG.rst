@@ -126,12 +126,13 @@ Scripting improvements
 - Commas in command substitution output are no longer used as separators in brace expansion, preventing a surprising expansion in rare cases (:issue:`5048`).
 - Universal variables can now store strings containing invalid Unicode codepoints (:issue:`10313`).
 - ``path basename`` now takes a ``-E`` option that causes it to return the basename (i.e. "filename" with the directory prefix removed) with the final extension (if any) also removed. This takes the place of ``path change-extension "" (path basename $foo)`` (:issue:`10521`).
+- ``math`` now adds ``--scale-mode`` parameter. You can choose between ``truncate``, ``round``, ``floor``, ``ceiling`` as you wish (default value is ``truncate``). (:issue:`9117`).
 
 Interactive improvements
 ------------------------
 - When using :kbd:`ctrl-x` on Wayland in the VSCode terminal, the clipboard is no longer cleared on :kbd:`ctrl-c`.
 - Command-specific tab completions may now offer results whose first character is a period. For example, it is now possible to tab-complete ``git add`` for files with leading periods. The default file completions hide these files, unless the token itself has a leading period (:issue:`3707`).
-- Option completion now uses fuzzy subsequence filtering, just like non-option completion.
+- Option completion now uses fuzzy subsequence filtering, just like non-option completion (:issue:`830`).
   This means that ``--fb`` may be completed to ``--foobar`` if there is no better match.
 - Completions that insert an entire token now use quotes instead of backslashes to escape special characters (:issue:`5433`).
 - Historically, file name completions are provided after the last ``:``  or ``=`` within a token.
@@ -175,10 +176,13 @@ New or improved bindings
 - Vi mode has seen some improvements but continues to suffer from the lack of people working on it.
   - Insert-mode :kbd:`ctrl-n` accepts autosuggestions (:issue:`10339`).
   - Outside insert mode, the cursor will no longer be placed beyond the last character on the commandline.
-  - When the cursor is at the end of the commandline, a single :kbd:`l` will accept an autosuggestion (:issue:`10286`)
+  - When the cursor is at the end of the commandline, a single :kbd:`l` will accept an autosuggestion (:issue:`10286`).
   - The cursor position after pasting (:kbd:`p`) has been corrected.
   - When the cursor is at the start of a line, escaping from insert mode no longer moves the cursor to the previous line.
   - Added bindings for clipboard interaction, like :kbd:`",+,p` and :kbd:`",+,y,y`.
+  - Deleting in visual mode now moves the cursor back, matching vi (:issue:`10394`).
+  - Support :kbd:`%` motion.
+  - Support `ab` and `ib` vi text objects. New input functions are introduced ``jump-{to,till}-matching-bracket`` (:issue:`1842`).
 
 Completions
 ^^^^^^^^^^^
